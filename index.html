@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bolsonaro Vs Covid</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600">
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="panel scores">
+            <div class="score">
+                <img :src="imgBolsonaro">
+                <h1>Bolsonaro</h1>
+                <div class="life-bar">
+                    <div class="life" 
+                        :class="{danger: bolsonaroLife < 20}"
+                        :style="{width: bolsonaroLife + '%'}"></div>
+                </div>
+                <div> {{ bolsonaroLife }}%</div>
+            </div>
+            <div class="score">
+                <img src="img/covid.gif" class='img-covid'>
+                <h1>Covid-19</h1>
+                <div class="life-bar">
+                    <div class="life"
+                        :class="{danger: covidLife < 20}"
+                        :style="{width: covidLife + '%'}"
+                        ></div>
+                </div>
+                <div> {{ covidLife }}%</div>
+            </div>
+        </div>
+        <div v-if="hasResult" class="panel result">
+            <div v-if="covidLife == 0" class="win"> Bolsonaro Ganhou!!! =)</div>
+            <div v-else class="lose"> Covid Ganhou!!! =(</div>
+
+        </div>
+        <div class="panel buttons">
+            <template v-if="running">
+                <button @click="attack(false)" class="btn attack" title="Ataque Básico">TA OK</button>
+                <button @click="attack(true)" class="btn especial-attack" title="Ataque Especial"> <i class="fas fa-syringe"></i> Tomar Vacina</button>
+                <button @click="healAndHurt" class="btn heal" title="Recupera Vida"> <i class="fas fa-heartbeat"></i> Usar Cloroquina</button>
+                <button @click="running = false" class="btn give-up">Desistir</button>
+            </template>
+            <button v-else @click="startGame" class="btn new-game">Iniciar Jogo</button>
+        </div>
+        <div v-if="logs.length" class="panel logs">
+            <ul>
+                <li v-for="log in logs"
+                    :class="log.cls"    
+                    class="log">
+                    {{ log.text }}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
