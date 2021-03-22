@@ -11,7 +11,7 @@ Funcionalidades do Jogo:
         <li>Iniciar Jogo</li>
     </ul>
 
-Conteúdos abortados Vue.js:
+Conteúdos abordados Vue.js:
 <ul>
     <li>computed</li>
     <li>methods</li>
